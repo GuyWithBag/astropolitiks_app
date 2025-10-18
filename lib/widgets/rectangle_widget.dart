@@ -1,4 +1,5 @@
 import 'dart:io' show Platform;
+import 'package:astropolitiks_app/widgets/skybox/skybox.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -35,7 +36,8 @@ class RectangleWidget extends HookWidget {
           constraints: const BoxConstraints(minWidth: 600, minHeight: 400),
           child: MouseRegion(
             onHover: (event) {
-              if (!kIsWeb && (Platform.isAndroid || Platform.isIOS)) return; // Ignore hovers on mobile
+              if (!kIsWeb && (Platform.isAndroid || Platform.isIOS))
+                return; // Ignore hovers on mobile
               onInteractionUpdate(event.localPosition);
             },
             onEnter: (event) {
@@ -74,6 +76,7 @@ class RectangleWidget extends HookWidget {
                     ),
                     width: 600,
                     height: 400,
+                    child: Skybox(),
                   ),
                   // Counter display top left
                   Positioned(
@@ -85,14 +88,20 @@ class RectangleWidget extends HookWidget {
                         duration: const Duration(milliseconds: 200),
                         opacity: isInteracting.value ? 1 : 0.5,
                         child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 8,
+                          ),
                           decoration: BoxDecoration(
                             color: Colors.white.withOpacity(0.85),
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: Text(
                             'Counter: ${counter.value}',
-                            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ),
@@ -106,7 +115,10 @@ class RectangleWidget extends HookWidget {
                       child: Material(
                         color: Colors.transparent,
                         child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 8,
+                          ),
                           decoration: BoxDecoration(
                             color: Colors.black.withOpacity(0.75),
                             borderRadius: BorderRadius.circular(8),
@@ -114,9 +126,10 @@ class RectangleWidget extends HookWidget {
                           child: Text(
                             'x: ${localPosition.value!.dx.toStringAsFixed(1)},\ny: ${localPosition.value!.dy.toStringAsFixed(1)}',
                             style: const TextStyle(
-                                fontSize: 16,
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold),
+                              fontSize: 16,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
                             textAlign: TextAlign.right,
                           ),
                         ),
